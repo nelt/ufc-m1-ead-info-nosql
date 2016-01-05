@@ -13,4 +13,36 @@
 
     <description>Code pour le module EAD BDA/NoSQL du Master 1 EAD de l'Unifersité de Franche Comté</description>
 
+    <url>https://github.com/nelt/ufc-m1-ead-info-nosql</url>
+
+    <licenses>
+        <license>
+            <name>GPLv3 License</name>
+            <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Nel Taurisson</name>
+            <email>nel.taurisson@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:nelt/codingmatters-code-graph</connection>
+        <developerConnection>scm:git:git@github.com:nelt/codingmatters-code-graph.git</developerConnection>
+        <url>git@github.com:nelt/codingmatters-code-graph.git</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
 </project>
