@@ -1,3 +1,17 @@
 language: java
+
+env:
+  global:
+  - secure: HiEIPWtWCmUl9+bJFcQlMX5ZGs1BWOXPRSu1X8vIN+DOVu+e9akGPp0f2XgZXCrDrGCtkHEIFJHD1VfjuxYPtB8tZX94Z6Q74A/+d0X0u+CUteC9WZK6GAtcfo7Aun7MzcwxEBMtw79xH+HAHM+leLlsweVxRIpGzqoAoRQEniw=
+  - secure: NB7GxBjvYhheyGErmB4/dRg9S4WZpZxl7Vmzi2LyujAILGKsERfrNVTPwhsPuSSPQ7iiVWkrkVOwftXKCUmP+5C+ZFrXam6TM0cJ8j1ivmxOJMvBTA36Y94I3HVOmcIAoiu9YfxM+6UEQXImTf6DYhwuMNtwvcQwTk5DiSXDcYM=
+  - secure: cNljFgsfA1MAKdnQzNeZPkiB4naCNTBUqa3oNVFsaLsWycWtn3RhQFM91nXGtjJ5J06azW3tqpXmPaFOIUfgL2KXiA2TUV+2knSfKdQPeLOT1+4Ik28c3JUDGDF9thzkElABt4GPOhZImTr6CAjtwdJy+xMrzTNjjDMU1vJEjoE=
+  - secure: Y0MK4j1EqfguVOPkZz5onU3mnamJvVoH0IfbMJ1yK+MCPGhb5bt4NElfZiTm1/wDK1Nk9Z1FNUArl+s22lj6vX/URps6OWubAReBzMv3hhGV47fF3lQezSgIx7E/nVSuHskqqawRK9rpbtP5pFH0sVjWVp6UoV8KgqLALwkWsbU=
+  - secure: QMhk9I8+MyEKi9pv7hIBbzreEvGhepItIT/ZZMf6oSKyeKHf5Jecy4x08PcGSE9Tc+8seNIebLJSq4JeMBgCZCYRMn1mdgdXRqZzzqVSqZp3TxuRB+M7YDqzEdoc8hCME6NH4ro0ALJuqkRY4KdyAaN6B7euhByV/GwjPe6NwPs=
+
 jdk:
   - oraclejdk8
+
+before_install:
+install: true
+script:
+    mvn deploy --settings .travis-settings.xml
