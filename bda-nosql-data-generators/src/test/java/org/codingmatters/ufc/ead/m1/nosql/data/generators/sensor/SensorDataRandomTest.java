@@ -1,12 +1,11 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor;
 
-import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.matcher.NumberMatchers;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
 
 import static java.time.OffsetDateTime.now;
-import static org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.matcher.NumberMatchers.between;
+import static org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.matcher.BetweenMatchers.between;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;

@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 /**
  * Created by vagrant on 2/15/16.
  */
-public class NumberMatchers {
+public class BetweenMatchers {
 
     static public <T extends Number> Matcher<T> between(T min, T max) {
         return new BaseMatcher<T>() {
