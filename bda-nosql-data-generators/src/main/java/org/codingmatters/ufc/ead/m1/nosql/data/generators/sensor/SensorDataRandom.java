@@ -1,16 +1,15 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor;
 
-import java.time.Instant;
+import org.codingmatters.ufc.ead.m1.nosql.data.generators.util.Randomizer;
+
 import java.time.OffsetDateTime;
-import java.util.Random;
 
 /**
  * Created by vagrant on 2/14/16.
  */
 public class SensorDataRandom {
 
-    private final Random random;
-    private final long seed;
+    private final Randomizer random;
 
     private final String [] sensors;
     private final double minTemperature;
@@ -23,8 +22,7 @@ public class SensorDataRandom {
     private SensorDataRandom(Long seed, String[] sensors, double minTemperature, double maxTemperature, double minHygrometry, double maxHygrometry, OffsetDateTime minAt, OffsetDateTime maxAt) {
         this.minAt = minAt;
         this.maxAt = maxAt;
-        this.seed = seed != null ? seed : System.currentTimeMillis();
-        this.random = new Random(this.seed);
+        this.random = new Randomizer(seed);
 
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
@@ -42,35 +40,31 @@ public class SensorDataRandom {
     }
 
     private String nextSensor() {
-        int index = this.random.nextInt(this.sensors.length);
-        return this.sensors[index];
+        String [] candidates = this.sensors;
+        return this.random.nextFromTable(candidates);
     }
 
     private double nextTemperature() {
-        return this.nextDoubleInRange(this.minTemperature, this.maxTemperature);
+        return this.random.nextDoubleInRange(this.minTemperature, this.maxTemperature);
     }
 
     private Double nextHygrometry() {
-        return this.nextDoubleInRange(this.minHygrometry, this.maxHygrometry);
-    }
-
-    private double nextDoubleInRange(double min, double max) {
-        return this.random.nextDouble() * (max - min) + min;
+        return this.random.nextDoubleInRange(this.minHygrometry, this.maxHygrometry);
     }
 
     private OffsetDateTime nextAt() {
-        if(this.minAt == null || this.maxAt == null) {
+        OffsetDateTime min = this.minAt;
+        OffsetDateTime max = this.maxAt;
+
+        if(min == null || max == null) {
             return OffsetDateTime.now();
         } else {
-            long min = this.minAt.toInstant().toEpochMilli();
-            long max = this.maxAt.toInstant().toEpochMilli();
-            long millis = (long) Math.floor(this.random.nextDouble() * (max - min) + min);
-            return OffsetDateTime.ofInstant(Instant.ofEpochMilli(millis), this.minAt.getOffset());
+            return this.random.nextOffsetDateTime(min, max);
         }
     }
 
     static public class Builder {
-        private String [] sensors = {"dummy"};
+        private String [] sensors = {"sensor"};
         private double minTemperature = -25;
         private double maxTemperature = 35;
         private double minHygrometry = 0.15;
