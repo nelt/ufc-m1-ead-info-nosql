@@ -1,6 +1,8 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.Map;
 
 /**
  * Created by vagrant on 2/14/16.
@@ -12,11 +14,11 @@ public class SensorData {
     }
 
     private final String name;
-    private final OffsetDateTime at;
+    private final LocalDateTime at;
     private final Double temperature;
     private final Double hygrometry;
 
-    private SensorData(String name, OffsetDateTime at, Double temperature, Double hygrometry) {
+    private SensorData(String name, LocalDateTime at, Double temperature, Double hygrometry) {
         this.name = name;
         this.at = at;
         this.temperature = temperature;
@@ -27,7 +29,7 @@ public class SensorData {
         return name;
     }
 
-    public OffsetDateTime getAt() {
+    public LocalDateTime getAt() {
         return at;
     }
 
@@ -39,20 +41,21 @@ public class SensorData {
         return hygrometry;
     }
 
-    static class Builder {
+    static public class Builder {
+
         private String name;
-        private OffsetDateTime at;
+        private LocalDateTime at;
         private Double temperature;
         private Double hygrometry;
 
-        private Builder() {}
+        public Builder() {}
 
         public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withAt(OffsetDateTime at) {
+        public Builder withAt(LocalDateTime at) {
             this.at = at;
             return this;
         }
@@ -69,6 +72,22 @@ public class SensorData {
 
         public SensorData build() {
             return new SensorData(this.name, this.at, this.temperature, this.hygrometry);
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setAt(LocalDateTime at) {
+            this.at = at;
+        }
+
+        public void setTemperature(Double temperature) {
+            this.temperature = temperature;
+        }
+
+        public void setHygrometry(Double hygrometry) {
+            this.hygrometry = hygrometry;
         }
     }
 

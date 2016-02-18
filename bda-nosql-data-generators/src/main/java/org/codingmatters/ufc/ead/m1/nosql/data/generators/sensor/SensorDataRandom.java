@@ -2,6 +2,7 @@ package org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor;
 
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.util.Randomizer;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 /**
@@ -16,12 +17,21 @@ public class SensorDataRandom {
     private final double maxTemperature;
     private final double minHygrometry;
     private final double maxHygrometry;
-    private final OffsetDateTime minAt;
-    private final OffsetDateTime maxAt;
 
-    private SensorDataRandom(Long seed, String[] sensors, double minTemperature, double maxTemperature, double minHygrometry, double maxHygrometry, OffsetDateTime minAt, OffsetDateTime maxAt) {
+    private final LocalDateTime minAt;
+    private final LocalDateTime maxAt;
+    private final long atMinuteIncrement = 60;
+    private LocalDateTime nextAtValue;
+
+    public long getAtMinuteIncrement() {
+        return atMinuteIncrement;
+    }
+
+    private SensorDataRandom(Long seed, String[] sensors, double minTemperature, double maxTemperature, double minHygrometry, double maxHygrometry, LocalDateTime minAt, LocalDateTime maxAt) {
         this.minAt = minAt;
         this.maxAt = maxAt;
+        this.nextAtValue = this.minAt;
+
         this.random = new Randomizer(seed);
 
         this.minTemperature = minTemperature;
@@ -52,16 +62,18 @@ public class SensorDataRandom {
         return this.random.nextDoubleInRange(this.minHygrometry, this.maxHygrometry);
     }
 
-    private OffsetDateTime nextAt() {
-        OffsetDateTime min = this.minAt;
-        OffsetDateTime max = this.maxAt;
-
-        if(min == null || max == null) {
-            return OffsetDateTime.now();
-        } else {
-            return this.random.nextOffsetDateTime(min, max);
+    private LocalDateTime nextAt() {
+        try {
+            return this.nextAtValue;
+        } finally {
+            this.nextAtValue = this.nextAtValue.plusMinutes(this.atMinuteIncrement);
+            if(this.nextAtValue.isAfter(this.maxAt)) {
+                this.nextAtValue = this.minAt;
+            }
         }
     }
+
+
 
     static public class Builder {
         private String [] sensors = {"sensor"};
@@ -69,8 +81,8 @@ public class SensorDataRandom {
         private double maxTemperature = 35;
         private double minHygrometry = 0.15;
         private double maxHygrometry = 0.85;
-        private OffsetDateTime minAt = null;
-        private OffsetDateTime maxAt = null;
+        private LocalDateTime minAt = LocalDateTime.MIN;
+        private LocalDateTime maxAt = LocalDateTime.MAX;
 
         public Builder withSensors(String ... sensors) {
             this.sensors = sensors;
@@ -89,7 +101,7 @@ public class SensorDataRandom {
             return this;
         }
 
-        public Builder withAtRange(OffsetDateTime min, OffsetDateTime max) {
+        public Builder withAtRange(LocalDateTime min, LocalDateTime max) {
             this.minAt = min;
             this.maxAt = max;
             return this;

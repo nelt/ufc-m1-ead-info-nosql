@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Sensor Data</title>
+</head>
+<body>
+<h1>Weekly Sensor Data</h1>
+
+<form action="">
+    <select name="sensor">
+        <option>sensor-0</option>
+        <option>sensor-1</option>
+        <option>sensor-2</option>
+        <option>sensor-3</option>
+        <option>sensor-4</option>
+        <option>sensor-5</option>
+        <option>sensor-6</option>
+        <option>sensor-7</option>
+        <option>sensor-8</option>
+        <option>sensor-9</option>
+        <option>sensor-10</option>
+        <option>sensor-11</option>
+        <option>sensor-12</option>
+        <option>sensor-13</option>
+        <option>sensor-14</option>
+        <option>sensor-15</option>
+        <option>sensor-16</option>
+        <option>sensor-17</option>
+        <option>sensor-18</option>
+        <option>sensor-19</option>
+    </select>
+    <input type="submit">
+</form>
+
+<canvas id="sensor-chart" width="800" height="400"></canvas>
+<p id="retrieval-time"></p>
+
+<script src="/Chart.min.js"></script>
+<script src="/sensor-chart.js"></script>
+<script src="/parameters.js"></script>
+<script>
+    var params = queryParams();
+    if(params.sensor) {
+        getSensorData('riak', params.sensor, 2015, 12);
+    }
+</script>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 /**
@@ -32,6 +33,21 @@ public class BetweenMatchers {
             @Override
             public boolean matches(Object o) {
                 OffsetDateTime v = (OffsetDateTime) o;
+                return v.compareTo(min) >= 0 && v.compareTo(max) <= 0;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("between ").appendValue(min).appendText(" and ").appendValue(max);
+            }
+        };
+    }
+
+    public static Matcher<LocalDateTime> between(LocalDateTime min, LocalDateTime max) {
+        return new BaseMatcher<LocalDateTime>() {
+            @Override
+            public boolean matches(Object o) {
+                LocalDateTime v = (LocalDateTime) o;
                 return v.compareTo(min) >= 0 && v.compareTo(max) <= 0;
             }
 

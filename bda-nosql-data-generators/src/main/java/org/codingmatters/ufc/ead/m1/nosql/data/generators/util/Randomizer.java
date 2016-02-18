@@ -1,7 +1,5 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.util;
 
-import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;
-
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.Random;
