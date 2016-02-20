@@ -3,6 +3,8 @@ package org.codingmatters.ufc.ead.m1.nosql.data.generators.util;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.Random;
+import java.util.concurrent.atomic.DoubleAccumulator;
+import java.util.regex.Matcher;
 
 /**
  * Created by vagrant on 2/15/16.
@@ -43,5 +45,13 @@ public class Randomizer {
     public String nextFromTable(String[] candidates) {
         int index = nextInt(candidates.length);
         return candidates[index];
+    }
+
+    public <T> T  nextGaussianFromTable(T[] candidates) {
+        int i = 2;
+        double v = Math.max(0, Math.min(i + this.random.nextGaussian(), 2 * i)) / (2 * i);
+        double r = v * (candidates.length - 1);
+        Double index = Math.floor(r);
+        return candidates[index.intValue()];
     }
 }

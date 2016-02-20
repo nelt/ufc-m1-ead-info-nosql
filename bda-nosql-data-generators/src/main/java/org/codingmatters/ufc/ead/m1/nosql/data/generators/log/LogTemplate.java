@@ -20,7 +20,7 @@ public class LogTemplate {
         return this.formatter.format();
     }
 
-    static interface Formatter {
+    public interface Formatter {
         String format();
     }
 }

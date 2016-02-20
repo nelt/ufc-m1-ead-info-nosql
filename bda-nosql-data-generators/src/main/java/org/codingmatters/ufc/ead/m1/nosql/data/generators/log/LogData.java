@@ -1,6 +1,6 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.log;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 /**
  * Created by vagrant on 2/15/16.
@@ -11,19 +11,19 @@ public class LogData {
         return new Builder().withLogger(name);
     }
 
-    private final OffsetDateTime at;
+    private final LocalDateTime at;
     private final Level level;
     private final String logger;
     private final String message;
 
-    public LogData(OffsetDateTime at, Level level, String logger, String message) {
+    public LogData(LocalDateTime at, Level level, String logger, String message) {
         this.at = at;
         this.level = level;
         this.logger = logger;
         this.message = message;
     }
 
-    public OffsetDateTime getAt() {
+    public LocalDateTime getAt() {
         return at;
     }
 
@@ -40,7 +40,7 @@ public class LogData {
     }
 
     static public class Builder {
-        private OffsetDateTime at;
+        private LocalDateTime at;
         private Level level;
         private String logger;
         private String message;
@@ -48,7 +48,7 @@ public class LogData {
         private Builder() {
         }
 
-        public Builder withAt(OffsetDateTime at) {
+        public Builder withAt(LocalDateTime at) {
             this.at = at;
             return this;
         }
