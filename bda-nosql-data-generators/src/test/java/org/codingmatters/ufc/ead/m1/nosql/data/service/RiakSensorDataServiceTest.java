@@ -8,6 +8,7 @@ import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.HostResolver.resolver;
@@ -15,6 +16,7 @@ import static org.codingmatters.ufc.ead.m1.nosql.data.utils.HostResolver.resolve
 /**
  * Created by vagrant on 2/17/16.
  */
+@Ignore
 public class RiakSensorDataServiceTest {
 
     private RiakCluster cluster;

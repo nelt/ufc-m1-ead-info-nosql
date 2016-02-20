@@ -32,13 +32,4 @@ public class SensorDataRandomTest {
         assertThat(actual.getAt(), is(notNullValue()));
     }
 
-    @Test
-    public void testAtRange() throws Exception {
-        SensorData actual = new SensorDataRandom.Builder()
-                .withAtRange(now().minusDays(200), now().minusDays(100))
-                .build().next();
-        System.out.println(actual);
-
-        assertThat(actual.getAt(), is(between(now().minusDays(200), now().minusDays(100))));
-    }
 }

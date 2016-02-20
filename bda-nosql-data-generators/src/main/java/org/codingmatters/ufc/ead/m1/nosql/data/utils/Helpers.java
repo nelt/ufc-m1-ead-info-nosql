@@ -8,6 +8,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.net.UnknownHostException;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.WeekFields;
+import java.util.Date;
+import java.util.Locale;
 
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.HostResolver.resolver;
 
@@ -39,5 +44,16 @@ public class Helpers {
             throw new RuntimeException("error creating riak client", e);
         }
         return cluster;
+    }
+
+    public static Date dateFromLocalDateTime(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    static public String formattedWeek(LocalDateTime localDateTime) {
+        return String.format("%04d-%02d",
+                localDateTime.getYear(),
+                localDateTime.get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear())
+        );
     }
 }

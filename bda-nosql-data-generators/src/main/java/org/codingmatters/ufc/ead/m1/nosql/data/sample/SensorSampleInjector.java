@@ -1,12 +1,10 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.sample;
 
-import com.basho.riak.client.api.RiakClient;
-import com.basho.riak.client.core.RiakCluster;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;
 import org.codingmatters.ufc.ead.m1.nosql.data.injectors.InjectorException;
-import org.codingmatters.ufc.ead.m1.nosql.data.injectors.RiakInjector;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.SensorDataInjector;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 
 import java.time.Duration;
@@ -20,40 +18,21 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 /**
  * Created by vagrant on 2/17/16.
  */
-public class SensorSampleToRiak {
+public class SensorSampleInjector {
 
-    public static void main(String[] args) {
-        RiakCluster cluster = Helpers.createRiakCluster();
-        RiakClient client = new RiakClient(cluster);
-        ObjectMapper mapper = Helpers.configureForDates(new ObjectMapper());
-
-        try {
-            LocalDateTime start = LocalDateTime.now().minusYears(2);
-            LocalDateTime end = LocalDateTime.now();
-
-            new SensorSampleToRiak(client, mapper, start, end).run();
-        } finally {
-            cluster.shutdown();
-        }
-    }
-
-    private final RiakClient client;
-    private final ObjectMapper mapper;
-    private final RiakInjector injector;
+    private final SensorDataInjector injector;
 
     private final int sensorCount = 20;
     private final LocalDateTime start;
     private final LocalDateTime end;
 
-    public SensorSampleToRiak(RiakClient client, ObjectMapper mapper, LocalDateTime start, LocalDateTime end) {
-        this.client = client;
-        this.mapper = mapper;
+    public SensorSampleInjector(SensorDataInjector injector, LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
-        this.injector = new RiakInjector(this.client, this.mapper);
+        this.injector = injector;
     }
 
-    private void run() throws RuntimeException {
+    public void run() throws RuntimeException {
         AtomicLong dataCount = new AtomicLong(0);
 
         ExecutorService pool = Executors.newFixedThreadPool(this.sensorCount);

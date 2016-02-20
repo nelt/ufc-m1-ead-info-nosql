@@ -23,9 +23,14 @@ function drawSensorChart(sensorData) {
 
     for(var i = 0 ; i < sensorData.data.length ; i++) {
         var at = sensorData.data[i].at;
-        labels.push(at[0] + '/' + at[1] + '/' + at[2] + ' ' + at[3] + ':' + at[4]);
+        if(at[3] == 0 && at[4] == 0) {
+            labels.push(at[0] + '/' + at[1] + '/' + at[2]);
+        } else {
+            labels.push("");
+        }
+
         temperatureData.push(sensorData.data[i].temperature);
-        hygrometryData.push(sensorData.data[i].hygrometry);
+        hygrometryData.push(100 * sensorData.data[i].hygrometry);
     }
 
     var ctx = document.getElementById("sensor-chart").getContext("2d");

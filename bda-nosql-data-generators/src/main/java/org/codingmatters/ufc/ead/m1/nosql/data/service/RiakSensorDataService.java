@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by vagrant on 2/17/16.
  */
-public class RiakSensorDataService {
+public class RiakSensorDataService implements SensorDataService {
 
     private final RiakClient client;
     private final ObjectMapper mapper;
@@ -29,6 +29,7 @@ public class RiakSensorDataService {
         this.mapper = mapper;
     }
 
+    @Override
     public SensorDataList weekData(String sensor, int year, int week) throws ServiceException {
         long retrievalStart = System.currentTimeMillis();
         List<SensorData> data = new LinkedList<>();

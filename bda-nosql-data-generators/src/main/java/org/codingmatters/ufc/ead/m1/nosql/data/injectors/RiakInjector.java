@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by vagrant on 2/16/16.
  */
-public class RiakInjector {
+public class RiakInjector implements SensorDataInjector {
 
     private final RiakClient client;
     private final ObjectMapper mapper;
@@ -26,7 +26,7 @@ public class RiakInjector {
         this.mapper = mapper;
     }
 
-
+    @Override
     public void inject(SensorData data) throws InjectorException {
         byte[] json;
         try {

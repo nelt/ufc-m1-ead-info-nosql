@@ -12,6 +12,7 @@ import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRando
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by vagrant on 2/16/16.
  */
+@Ignore
 public class RiakInjectorTest {
 
     private RiakCluster cluster;
