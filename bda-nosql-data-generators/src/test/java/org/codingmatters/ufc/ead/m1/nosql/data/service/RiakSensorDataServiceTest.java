@@ -5,6 +5,8 @@ import com.basho.riak.client.core.RiakCluster;
 import com.basho.riak.client.core.RiakNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.RiakSensorDataService;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.SensorDataList;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.service;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.sensor;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.kv.FetchValue;

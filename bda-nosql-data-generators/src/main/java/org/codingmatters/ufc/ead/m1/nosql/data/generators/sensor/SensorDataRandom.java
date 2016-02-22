@@ -1,9 +1,8 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor;
 
-import org.codingmatters.ufc.ead.m1.nosql.data.generators.util.Randomizer;
+import org.codingmatters.ufc.ead.m1.nosql.data.utils.Randomizer;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 /**
  * Created by vagrant on 2/14/16.

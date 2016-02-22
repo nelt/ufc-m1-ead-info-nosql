@@ -1,11 +1,9 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.log;
 
-import org.codingmatters.ufc.ead.m1.nosql.data.generators.util.Randomizer;
+import org.codingmatters.ufc.ead.m1.nosql.data.utils.Randomizer;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by vagrant on 2/15/16.

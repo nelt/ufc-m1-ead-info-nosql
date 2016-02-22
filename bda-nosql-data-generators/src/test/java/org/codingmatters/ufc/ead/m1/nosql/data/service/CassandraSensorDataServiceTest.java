@@ -3,6 +3,8 @@ package org.codingmatters.ufc.ead.m1.nosql.data.service;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.CassandraSensorDataService;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.SensorDataList;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 import org.junit.After;
 import org.junit.Before;

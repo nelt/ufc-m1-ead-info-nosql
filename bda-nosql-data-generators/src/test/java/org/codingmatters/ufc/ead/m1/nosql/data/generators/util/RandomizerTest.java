@@ -1,11 +1,10 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.util;
 
+import org.codingmatters.ufc.ead.m1.nosql.data.utils.Randomizer;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by vagrant on 2/20/16.

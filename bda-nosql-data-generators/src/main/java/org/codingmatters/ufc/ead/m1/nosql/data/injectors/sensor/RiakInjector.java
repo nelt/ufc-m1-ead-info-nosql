@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.injectors;
+package org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.kv.StoreValue;
@@ -9,6 +9,7 @@ import com.basho.riak.client.core.util.BinaryValue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.InjectorException;
 
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutionException;

@@ -1,8 +1,9 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.injectors;
+package org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor;
 
 import com.datastax.driver.core.*;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.CassandraInjector;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;

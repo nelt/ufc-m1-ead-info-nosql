@@ -1,12 +1,11 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.injectors;
+package org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.InjectorException;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
-
-import java.time.LocalDateTime;
 
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers.dateFromLocalDateTime;
 

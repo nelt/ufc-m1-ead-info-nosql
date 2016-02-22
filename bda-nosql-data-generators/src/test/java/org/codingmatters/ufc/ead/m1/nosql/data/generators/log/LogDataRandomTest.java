@@ -1,13 +1,10 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.generators.log;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isOneOf;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**

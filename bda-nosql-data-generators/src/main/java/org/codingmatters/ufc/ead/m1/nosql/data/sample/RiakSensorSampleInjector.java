@@ -3,7 +3,7 @@ package org.codingmatters.ufc.ead.m1.nosql.data.sample;
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.core.RiakCluster;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.codingmatters.ufc.ead.m1.nosql.data.injectors.RiakInjector;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.RiakInjector;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 
 import java.time.LocalDateTime;

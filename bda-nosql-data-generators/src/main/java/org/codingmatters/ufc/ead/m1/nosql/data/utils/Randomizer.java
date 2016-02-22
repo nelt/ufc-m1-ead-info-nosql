@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.generators.util;
+package org.codingmatters.ufc.ead.m1.nosql.data.utils;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;

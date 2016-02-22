@@ -1,10 +1,9 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.sample;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;
 import org.codingmatters.ufc.ead.m1.nosql.data.injectors.InjectorException;
-import org.codingmatters.ufc.ead.m1.nosql.data.injectors.SensorDataInjector;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.SensorDataInjector;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 
 import java.time.Duration;

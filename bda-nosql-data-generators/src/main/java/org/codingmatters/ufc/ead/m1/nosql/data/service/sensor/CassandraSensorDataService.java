@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.service;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.sensor;
 
 import com.datastax.driver.core.*;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
