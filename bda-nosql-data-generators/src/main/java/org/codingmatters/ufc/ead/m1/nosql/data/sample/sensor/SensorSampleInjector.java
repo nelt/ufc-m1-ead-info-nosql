@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.sample;
+package org.codingmatters.ufc.ead.m1.nosql.data.sample.sensor;
 
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;

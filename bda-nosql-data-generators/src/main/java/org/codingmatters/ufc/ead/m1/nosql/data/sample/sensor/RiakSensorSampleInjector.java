@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.sample;
+package org.codingmatters.ufc.ead.m1.nosql.data.sample.sensor;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.core.RiakCluster;
