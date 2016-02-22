@@ -117,13 +117,20 @@
 <script src="/parameters.js"></script>
 <script>
     var params = queryParams();
+    if(! params.sensor) {
+        params.sensor = 'sensor-0';
+    }
+    if(! params.year) {
+        params.year = '2015';
+    }
+    if(! params.week) {
+        params.week = '1';
+    }
     document.getElementById('sensor-selection').value = params.sensor;
     document.getElementById('year-selection').value = params.year;
     document.getElementById('week-selection').value = params.week;
 
-    if(params.sensor) {
-        getSensorData('cassandra', params.sensor, params.year, params.week);
-    }
+    getSensorData('cassandra', params.sensor, params.year, params.week);
 </script>
 
 </body>
