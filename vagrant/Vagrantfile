@@ -1,0 +1,95 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+
+  config.vm.define "riak" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "riak"
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/riak.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.100"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
+
+  config.vm.define "cassandra" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "cassandra"
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/cassandra.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.110"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
+
+  config.vm.define "hadoop" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "hadoop"
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/hadoop.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.120"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
+
+  config.vm.define "mongo" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "mongo"
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/mongo.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.130"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
+
+
+  config.vm.define "elastic" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "elastic"
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.140"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
+
+  config.vm.define "dev" do |config|
+    config.vm.box = "ubuntu/vivid64"
+    config.vm.hostname = "dev"
+
+    config.ssh.forward_agent = true
+    config.ssh.forward_x11 = true
+
+    config.vm.provision "shell", path: "provisioning/base-java8.sh"
+    config.vm.provision "shell", path: "provisioning/dev.sh"
+
+    config.vm.network "private_network", ip: "192.168.33.200"
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+
+    config.vm.synced_folder "../", "/home/vagrant/src"
+  end
+
+
+end
