@@ -36,6 +36,98 @@ public class Tweet {
         }
         return mentions;
     }
+    
+    static public class Builder {
+        private User user;
+        private String text;
+        private String lang;
+        private Date createdAt;
+        private HashSet<String> mentions;
+        private HashSet<String> htags;
+        private HashSet<String> links;
+
+        public Builder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Builder withText(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public Builder withLang(String lang) {
+            this.lang = lang;
+            return this;
+        }
+
+        public Builder withCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder withMentions(String ... mentions) {
+            this.mentions.clear();
+            if(mentions != null) {
+                for (String mention : mentions) {
+                    this.mentions.add(mention);
+                }
+            }
+            return this;
+        }
+
+        public Builder withHtags(String ... htags) {
+            this.htags.clear();
+            if(htags != null) {
+                for (String htag : htags) {
+                    this.htags.add(htag);
+                }
+            }
+            return this;
+        }
+
+        public Builder withLinks(String ... links) {
+            this.links.clear();
+            if(links != null) {
+                for (String link : links) {
+                    this.htags.add(link);
+                }
+            }
+            return this;
+        }
+
+        public Tweet build() {
+            return new Tweet(this.user, this.text, this.lang, this.createdAt, this.mentions, this.htags, this.links);
+        }
+
+        public void setUser(User.Builder user) {
+            this.user = user.build();
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public void setLang(String lang) {
+            this.lang = lang;
+        }
+
+        public void setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public void setMentions(HashSet<String> mentions) {
+            this.mentions = mentions;
+        }
+
+        public void setHtags(HashSet<String> htags) {
+            this.htags = htags;
+        }
+
+        public void setLinks(HashSet<String> links) {
+            this.links = links;
+        }
+    }
 
 
     private final User user;
@@ -82,5 +174,18 @@ public class Tweet {
 
     public HashSet<String> getLinks() {
         return links;
+    }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "user=" + user +
+                ", text='" + text + '\'' +
+                ", lang='" + lang + '\'' +
+                ", createdAt=" + createdAt +
+                ", mentions=" + mentions +
+                ", htags=" + htags +
+                ", links=" + links +
+                '}';
     }
 }
