@@ -12,17 +12,11 @@ public class LogDataRandom {
     
     static public class Builder {
         private Long seed;
-        private String[] loggers; 
-        private LocalDateTime minAt; 
+        private LocalDateTime minAt;
         private LogTemplate[] messages;
 
         public Builder withSeed(Long seed) {
             this.seed = seed;
-            return this;
-        }
-
-        public Builder withLoggers(String ... loggers) {
-            this.loggers = loggers;
             return this;
         }
 
@@ -37,20 +31,18 @@ public class LogDataRandom {
         }
 
         public LogDataRandom build() {
-            return new LogDataRandom(this.seed != null ? this.seed : System.currentTimeMillis(), this.loggers, this.minAt, this.messages);
+            return new LogDataRandom(this.seed != null ? this.seed : System.currentTimeMillis(), this.minAt, this.messages);
         }
     }
 
     private final Randomizer random;
-    private final String [] loggers;
 
     private final int atMaxIncrement = 5000;
     private LocalDateTime previousAt;
 
     private final LogTemplate [] templates;
 
-    public LogDataRandom(Long seed, String[] loggers, LocalDateTime minAt, LogTemplate[] templates) {
-        this.loggers = loggers;
+    public LogDataRandom(Long seed, LocalDateTime minAt, LogTemplate[] templates) {
         this.previousAt = minAt;
         this.templates = templates;
         this.random = new Randomizer(seed);
@@ -59,7 +51,7 @@ public class LogDataRandom {
     public LogData next() {
         LogTemplate template = this.nextTemplate();
         return LogData
-                .logger(this.nextLogger())
+                .logger(template.getLogger())
                 .withAt(this.nextAt())
                 .withLevel(template.getLevel())
                 .withMessage(template.getMessage())
@@ -68,10 +60,6 @@ public class LogDataRandom {
 
     private LogTemplate nextTemplate() {
         return this.random.nextGaussianFromTable(this.templates);
-    }
-
-    private String nextLogger() {
-        return this.random.nextFromTable(this.loggers);
     }
 
     private LocalDateTime nextAt() {
@@ -84,4 +72,7 @@ public class LogDataRandom {
         }
     }
 
+    public LocalDateTime getPreviousAt() {
+        return previousAt;
+    }
 }

@@ -24,63 +24,42 @@ import java.util.regex.Pattern;
 /**
  * Created by nel on 06/01/16.
  */
-public class TwitterStreamConsumer {
+public class TwitterStreamConsumer implements AutoCloseable {
+
+    static public class Builder {
+        private String consumerKey = "Pn4JDnhqd065Z00oovMo3qYSN";
+        private String consumerSecret = "prMiQmo7dVTYuqPx91hBItySXBQfdvmqHPQA5KmWGxic0GApsS";
+        private String token = "409077150-IQvfx5mnxzpDtFW4yOugrL6jewbLP6xXuJRa6x4k";
+        private String secret = "vai1ICQsGZt9vyBulbXiNnwA3VsAKL1iOQr5CxkmESLbl";
+
+        public Builder withConsumerKey(String consumerKey) {
+            this.consumerKey = consumerKey;
+            return this;
+        }
+
+        public Builder withConsumerSecret(String consumerSecret) {
+            this.consumerSecret = consumerSecret;
+            return this;
+        }
+
+        public Builder withToken(String token) {
+            this.token = token;
+            return this;
+        }
+
+        public Builder withSecret(String secret) {
+            this.secret = secret;
+            return this;
+        }
+
+        public TwitterStreamConsumer build() {
+            return new TwitterStreamConsumer(this.consumerKey, this.consumerSecret, this.token, this.secret);
+        }
+    }
+
 
     static private Logger log = LoggerFactory.getLogger(TwitterStreamConsumer.class);
     private BlockingQueue<String> queue;
-
-    public static void main(String[] args) {
-        String consumerKey = "Pn4JDnhqd065Z00oovMo3qYSN";
-        String consumerSecret = "prMiQmo7dVTYuqPx91hBItySXBQfdvmqHPQA5KmWGxic0GApsS";
-        String token = "409077150-IQvfx5mnxzpDtFW4yOugrL6jewbLP6xXuJRa6x4k";
-        String secret = "vai1ICQsGZt9vyBulbXiNnwA3VsAKL1iOQr5CxkmESLbl";
-
-        AtomicLong consumed = new AtomicLong(0);
-        long startAt = System.currentTimeMillis();
-        long elapsed = 0;
-
-        TwitterStreamConsumer twitterStreamConsumer = new TwitterStreamConsumer(consumerKey, consumerSecret, token, secret);
-        try {
-            twitterStreamConsumer.consume(status -> {
-
-                Tweet tweet = Tweet.from(status);
-                log.info("**********************" +
-                        "\n\tuser      : {} ({} followers)" +
-                        "\n\ttext      : {}" +
-                        "\n\tlanguage  : {}" +
-                        "\n\tcreated at: {}" +
-                        "\n\tmentions  : {}" +
-                        "\n\thtags     : {}" +
-                        "\n\tmentions  : {}",
-                        tweet.getUser().getName(), tweet.getUser().getFollowersCount(),
-                        tweet.getText(),
-                        tweet.getLang(),
-                        tweet.getCreatedAt(),
-                        tweet.getMentions(),
-                        tweet.getHtags(),
-                        tweet.getLinks()
-                );
-
-                consumed.incrementAndGet();
-            });
-
-            while(consumed.get() < 100) {
-                Thread.sleep(100L);
-            }
-            elapsed = System.currentTimeMillis() - startAt;
-         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                twitterStreamConsumer.stop();
-            } catch (InterruptedException e) {
-                throw new RuntimeException("error stopping consumer", e);
-            }
-        }
-
-        log.info("consumed {} tweets in {}ms.", consumed.get(), elapsed);
-    }
-
 
     private final Authentication auth;
     private ExecutorService service;
@@ -111,7 +90,7 @@ public class TwitterStreamConsumer {
 
         // Create an executor service which will spawn threads to do the actual work of parsing the incoming messages and
         // calling the listeners on each message
-        int numProcessingThreads = 4;
+        int numProcessingThreads = 10;
         this.service = Executors.newFixedThreadPool(numProcessingThreads);
 
         // Wrap our BasicClient with the twitter4j client
@@ -132,7 +111,8 @@ public class TwitterStreamConsumer {
         }
     }
 
-    private void stop() throws InterruptedException {
+    @Override
+    public void close() throws Exception {
         log.info("stopping client...");
         client.stop();
         log.info("client stopped.");
