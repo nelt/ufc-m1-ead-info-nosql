@@ -22,7 +22,6 @@ public class ESTweetSampleInjector {
         Client client = null;
         try {
             InetAddress host = InetAddress.getByName(resolver().resolve("elastic"));
-            System.out.println(host);
             client = TransportClient.builder().build()
                     .addTransportAddress(new InetSocketTransportAddress(host, 9300));
 

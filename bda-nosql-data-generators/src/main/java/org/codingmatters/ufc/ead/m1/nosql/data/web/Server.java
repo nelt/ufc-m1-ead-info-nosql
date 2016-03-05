@@ -10,10 +10,18 @@ import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.RiakSensorDataServ
 import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.SensorDataService;
 import org.codingmatters.ufc.ead.m1.nosql.data.service.exception.ServiceException;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
+import org.codingmatters.ufc.ead.m1.nosql.data.web.tweet.TweetSearchService;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import spark.Request;
 import spark.Response;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.HostResolver.resolver;
 import static spark.Spark.externalStaticFileLocation;
@@ -52,8 +60,43 @@ public class Server {
     private Cluster cassandraCluster;
     private CassandraSensorDataService cassandraSensorDataService;
 
+    private TweetSearchService tweetSearchService;
+
+
     public Server() {
     }
+
+
+    public void stop() {
+        this.cluster.shutdown();
+    }
+
+    public void run() {
+        if(System.getProperty("dev.mode") != null) {
+            System.out.println("running in dev mode");
+            externalStaticFileLocation(new File("./src/main/resources/www").getAbsolutePath());
+        } else {
+            staticFileLocation("www");
+        }
+        get("/riak/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getRiakService()));
+        get("/cassandra/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getCassandraService()));
+
+        get("/elasticsearch/search/tweets", (request, response) -> this.getTweetSearchService().process(request, response));
+    }
+
+
+    private Object serveWeeklySensorData(Request request, Response response, SensorDataService withService) throws JsonProcessingException, ServiceException {
+        String sensor = request.params(":sensor");
+        int year = Integer.parseInt(request.params(":year"));
+        int week = Integer.parseInt(request.params(":week"));
+
+        System.out.println("requested for weekly sensor data for " + sensor + " " + year + "/" + week);
+
+        response.type("application/json");
+        return this.mapper.writeValueAsString(withService.weekData(sensor, year, week));
+    }
+
+
 
     private synchronized SensorDataService getRiakService() {
         if(this.riakSensorDataService == null) {
@@ -71,30 +114,22 @@ public class Server {
         return this.cassandraSensorDataService;
     }
 
-    public void stop() {
-        this.cluster.shutdown();
-    }
+    private synchronized TweetSearchService getTweetSearchService() {
+        if(this.tweetSearchService == null) {
+            Client client = null;
+            try {
+                InetAddress host = InetAddress.getByName(resolver().resolve("elastic"));
+                client = TransportClient.builder().build()
+                        .addTransportAddress(new InetSocketTransportAddress(host, 9300));
 
-    public void run() {
-        if(System.getProperty("dev.mode") != null) {
-            System.out.println("running in dev mode");
-            externalStaticFileLocation(new File("./src/main/resources/www").getAbsolutePath());
-        } else {
-            staticFileLocation("www");
+                if(! client.admin().indices().exists(new IndicesExistsRequest("twitter")).actionGet().isExists()) {
+                    client.admin().indices().create(new CreateIndexRequest("twitter")).actionGet();
+                }
+            } catch (UnknownHostException e) {
+                throw new RuntimeException("error creating elastic search client", e);
+            }
+            this.tweetSearchService = new TweetSearchService(client);
         }
-        get("/riak/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getRiakService()));
-        get("/cassandra/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getCassandraService()));
-    }
-
-
-    private Object serveWeeklySensorData(Request request, Response response, SensorDataService withService) throws JsonProcessingException, ServiceException {
-        String sensor = request.params(":sensor");
-        int year = Integer.parseInt(request.params(":year"));
-        int week = Integer.parseInt(request.params(":week"));
-
-        System.out.println("requested for weekly sensor data for " + sensor + " " + year + "/" + week);
-
-        response.type("application/json");
-        return this.mapper.writeValueAsString(withService.weekData(sensor, year, week));
+        return this.tweetSearchService;
     }
 }

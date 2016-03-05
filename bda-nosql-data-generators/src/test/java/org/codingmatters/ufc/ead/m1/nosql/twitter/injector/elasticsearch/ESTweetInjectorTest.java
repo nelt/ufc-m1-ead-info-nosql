@@ -70,7 +70,7 @@ public class ESTweetInjectorTest {
         SearchResponse response = this.client.prepareSearch("twitter").setQuery(
                 QueryBuilders.matchAllQuery()
         ).addAggregation(
-                AggregationBuilders.terms("htags")
+                AggregationBuilders.terms("htags").field("htags")
         ).execute().actionGet();
 
         System.out.println(response.toString());
