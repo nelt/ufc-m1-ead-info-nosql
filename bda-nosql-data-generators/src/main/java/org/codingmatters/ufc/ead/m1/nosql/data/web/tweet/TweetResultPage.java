@@ -19,66 +19,88 @@ public class TweetResultPage {
     private long took;
 
     public String render() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd, HH:mm:ss");
-
         String page = "<html>" +
                 "<head>" +
                 "<title>Tweet search</title>" +
+                "<link rel=\"stylesheet\" href=\"/tweet.css\">" +
                 "</head>" +
                 "<body>\n";
 
-        page += "<p class=\"tweet-search-box\">" +
+        page += this.renderSearchBox();
+        page += this.renderCurrentSelectedHTags();
+        page += this.renderHtagSelection();
+        page += this.renderSearchStatistics();
+        page += this.renderResults();
+
+        return page + "\n</body></html>";
+    }
+
+    private String renderSearchBox() {
+        String fragment = "<p class=\"tweet-search-box\">" +
                 "<form action=\"\">";
         for (String htag : this.currentHtags) {
-            page += "<input type=\"hidden\" name=\"htags\" value=\"" + htag + "\" />";
+            fragment += "<input type=\"hidden\" name=\"htags\" value=\"" + htag + "\" />";
         }
 
-        page +=
+        fragment +=
                 "Search: <input class=\"tweet-search\" type=\"text\" name=\"search\" value=\"" +
                 (this.currentSearch != null ? this.currentSearch : "") +
                 "\"/>" +
                 "</form>" +
                 "</p>";
+        return fragment;
+    }
 
+    private String renderCurrentSelectedHTags() {
         if(! this.currentHtags.isEmpty()) {
-            page += "<p class=\"tweet-current-htag-filter\">Current # filter :\n";
+            String fragment = "<p class=\"tweet-current-htag-filter\">Current # filter :\n";
             for (String htag : this.currentHtags) {
-                page += "<a href=\"" + this.getQueryParamsWithoutHtag(htag) + "\" " +
+                fragment += "<a href=\"" + this.getQueryParamsWithoutHtag(htag) + "\" " +
                         "class=\"tweet-htag-facet\">- " + htag +
                         "</a> \n";
             }
-            page += "</p>";
+            fragment += "</p>";
+            return fragment;
+        } else {
+            return "";
         }
+    }
 
-        page += "<p class=\"tweet-htag-facets\">Add # filter:\n";
+    private String renderHtagSelection() {
+        String fragment = "<p class=\"tweet-htag-facets\">Add # filter:\n";
         for (HtagFacet htagFacet : this.htagFacets) {
             if(! this.currentHtags.contains(htagFacet.getHtag())) {
-                page += "<a href=\"" + this.getQueryParamsWithHtag(htagFacet.getHtag()) + "\" " +
+                fragment += "<a href=\"" + this.getQueryParamsWithHtag(htagFacet.getHtag()) + "\" " +
                         "class=\"tweet-htag-facet\">" +
                         "+ " + htagFacet.getHtag() + " (" + htagFacet.getDocCount() + ")" +
                         "</a> \n";
             }
         }
-        page += "</p>";
+        fragment += "</p>";
+        return fragment;
+    }
 
+    private String renderSearchStatistics() {
+        String fragment = "<p class=\"search-stats\">" + this.totalResults + " tweets are matching. " + this.tweets.size() + " first displayed.</p>\n";
+        fragment += "<p class=\"search-took\">Search took " + this.took + "ms.</p>\n";
+        return fragment;
+    }
 
-        page += "<p class=\"search-stats\">" + this.totalResults + " tweets are matching. " + this.tweets.size() + " first displayed.</p>\n";
-        page += "<p class=\"search-took\">Search took " + this.took + "ms.</p>\n";
+    private String renderResults() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd, HH:mm:ss");
 
-        page += "<p class=\"tweet-results\">" +
+        String fragment = "<p class=\"tweet-results\">" +
                 "<ul>\n";
         for (Tweet tweet : this.tweets) {
-            page += "<li>" +
+            fragment += "<li>" +
                     "<span class=\"tweet-text\">" + tweet.getText() + "</span>" +
                     "<span class=\"tweet-user\">" + tweet.getUser().getName() + "</span>" +
                     "<span class=\"tweet-date\">" + dateFormat.format(tweet.getCreatedAt()) + "</span>" +
                     "</li>\n";
         }
-        page += "</ul>" +
+        fragment += "</ul>" +
                 "</p>\n";
-
-
-        return page + "\n</body></html>";
+        return fragment;
     }
 
     private String getQueryParamsWithHtag(String htag) {
