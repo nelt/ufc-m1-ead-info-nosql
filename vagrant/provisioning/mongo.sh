@@ -7,3 +7,8 @@ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" 
 sudo apt-get -q update
 sudo apt-get -q install -y mongodb-org
 
+IP=$(ifconfig eth1|grep "inet addr:"|awk '{print $2}'|awk -F : '{print $2}')
+sudo sed -i "s/bindIp: 127.0.0.1/bindIp: ${IP}/g" /etc/mongod.conf
+
+sudo sudo service mongod restart
+
