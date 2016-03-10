@@ -1,6 +1,7 @@
 package org.codingmatters.ufc.ead.m1.nosql.twitter.injector.mongo;
 
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
@@ -36,9 +37,10 @@ public class MongoTweetInjector implements TweetInjector {
         ObjectId id = (ObjectId) dbTweet.get("_id");
 
         for (String htag : tweet.getHtags()) {
-            this.db.getCollection(htag + "_tweets").insertOne(
-                    new Document("tweet_id", id)
-                            .append("createdAt", tweet.getCreatedAt())
+            this.db.getCollection("htags").findOneAndUpdate(
+                    new Document("htag", htag),
+                    new Document("$inc", new Document("count", 1)),
+                    new FindOneAndUpdateOptions().upsert(true)
             );
         }
 

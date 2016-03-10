@@ -5,12 +5,14 @@ import com.basho.riak.client.core.RiakCluster;
 import com.datastax.driver.core.Cluster;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.MongoClient;
 import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.CassandraSensorDataService;
 import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.RiakSensorDataService;
 import org.codingmatters.ufc.ead.m1.nosql.data.service.sensor.SensorDataService;
 import org.codingmatters.ufc.ead.m1.nosql.data.service.exception.ServiceException;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.MongoTweetSearchService;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
-import org.codingmatters.ufc.ead.m1.nosql.data.web.tweet.TweetSearchService;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.ESTweetSearchService;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
 import org.elasticsearch.client.Client;
@@ -60,8 +62,10 @@ public class Server {
     private Cluster cassandraCluster;
     private CassandraSensorDataService cassandraSensorDataService;
 
-    private TweetSearchService tweetSearchService;
+    private ESTweetSearchService ESTweetSearchService;
 
+    private MongoClient mongoClient;
+    private MongoTweetSearchService mongoTweetSearchService;
 
     public Server() {
     }
@@ -81,7 +85,9 @@ public class Server {
         get("/riak/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getRiakService()));
         get("/cassandra/sensor/weekly/data/:sensor/:year/:week", (request, response) -> this.serveWeeklySensorData(request, response, this.getCassandraService()));
 
-        get("/elasticsearch/search/tweets", (request, response) -> this.getTweetSearchService().process(request, response));
+        get("/elasticsearch/search/tweets", (request, response) -> this.getESTweetSearchService().process(request, response));
+
+        get("/mongo/search/tweets", (request, response) -> this.getTweetMongoService().process(request, response));
     }
 
 
@@ -114,8 +120,8 @@ public class Server {
         return this.cassandraSensorDataService;
     }
 
-    private synchronized TweetSearchService getTweetSearchService() {
-        if(this.tweetSearchService == null) {
+    private synchronized ESTweetSearchService getESTweetSearchService() {
+        if(this.ESTweetSearchService == null) {
             Client client = null;
             try {
                 InetAddress host = InetAddress.getByName(resolver().resolve("elastic"));
@@ -128,8 +134,18 @@ public class Server {
             } catch (UnknownHostException e) {
                 throw new RuntimeException("error creating elastic search client", e);
             }
-            this.tweetSearchService = new TweetSearchService(client);
+            this.ESTweetSearchService = new ESTweetSearchService(client);
         }
-        return this.tweetSearchService;
+        return this.ESTweetSearchService;
+    }
+
+
+
+    private synchronized MongoTweetSearchService getTweetMongoService() {
+        if(this.mongoTweetSearchService == null) {
+            this.mongoClient = new MongoClient(resolver().resolve("mongo"), 27017);
+            this.mongoTweetSearchService = new MongoTweetSearchService(mongoClient.getDatabase("twitter"));
+        }
+        return this.mongoTweetSearchService;
     }
 }

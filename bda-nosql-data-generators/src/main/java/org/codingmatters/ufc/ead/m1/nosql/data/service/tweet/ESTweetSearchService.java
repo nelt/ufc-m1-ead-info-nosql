@@ -1,11 +1,10 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.web.tweet;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet;
 
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.User;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -17,7 +16,6 @@ import spark.Request;
 import spark.Response;
 
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -26,13 +24,13 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by vagrant on 3/3/16.
  */
-public class TweetSearchService {
+public class ESTweetSearchService {
 
-    static private Logger log = LoggerFactory.getLogger(TweetSearchService.class);
+    static private Logger log = LoggerFactory.getLogger(ESTweetSearchService.class);
 
     private final Client client;
 
-    public TweetSearchService(Client client) {
+    public ESTweetSearchService(Client client) {
         this.client = client;
     }
 

@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.web.tweet;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet;
 
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 
