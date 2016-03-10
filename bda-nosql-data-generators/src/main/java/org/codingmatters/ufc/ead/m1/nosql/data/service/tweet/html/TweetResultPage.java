@@ -1,5 +1,6 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.html;
 
+import org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.html.HtagFacet;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 
 import java.text.DateFormat;

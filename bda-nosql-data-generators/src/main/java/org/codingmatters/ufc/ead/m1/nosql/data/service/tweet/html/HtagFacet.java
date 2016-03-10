@@ -1,4 +1,4 @@
-package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet;
+package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.html;
 
 /**
  * Created by vagrant on 3/3/16.

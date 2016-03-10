@@ -4,6 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.html.TweetResultPage;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.User;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package org.codingmatters.ufc.ead.m1.nosql.data.service.tweet;
 
+import org.codingmatters.ufc.ead.m1.nosql.data.service.tweet.html.TweetResultPage;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.User;
 import org.elasticsearch.action.search.SearchResponse;
