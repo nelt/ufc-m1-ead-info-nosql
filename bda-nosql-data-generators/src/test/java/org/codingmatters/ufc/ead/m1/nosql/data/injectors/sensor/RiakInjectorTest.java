@@ -9,7 +9,7 @@ import com.basho.riak.client.core.query.Namespace;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorData;
 import org.codingmatters.ufc.ead.m1.nosql.data.generators.sensor.SensorDataRandom;
-import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.RiakInjector;
+import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.riak.RiakInjector;
 import org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers;
 import org.junit.After;
 import org.junit.Before;
