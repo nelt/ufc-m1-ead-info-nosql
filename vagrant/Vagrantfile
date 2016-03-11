@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "riak"
 
     config.ssh.guest_port = 10022
-    config.vm.network "forwarded_port", guest: 22, host: 10022
+    config.vm.network "forwarded_port", guest: 22, host: 10022, id: 'ssh'
 
     config.vm.provision "shell", path: "provisioning/riak.sh"
 
@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "cassandra"
 
     config.ssh.guest_port = 11022
-    config.vm.network "forwarded_port", guest: 22, host: 11022
+    config.vm.network "forwarded_port", guest: 22, host: 11022, id: 'ssh'
 
     config.vm.provision "shell", path: "provisioning/base-java8.sh"
     config.vm.provision "shell", path: "provisioning/cassandra.sh"
@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "hadoop"
 
     config.ssh.guest_port = 12022
-    config.vm.network "forwarded_port", guest: 22, host: 12022
+    config.vm.network "forwarded_port", guest: 22, host: 12022, id: 'ssh'
 
     config.vm.provision "shell", path: "provisioning/base-java8.sh"
     config.vm.provision "shell", path: "provisioning/hadoop.sh"
@@ -59,7 +59,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "mongo"
 
     config.ssh.guest_port = 13022
-    config.vm.network "forwarded_port", guest: 22, host: 13022
+    config.vm.network "forwarded_port", guest: 22, host: 13022, id: 'ssh'
 
     config.vm.provision "shell", path: "provisioning/mongo.sh"
 
@@ -76,7 +76,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "elastic"
 
     config.ssh.guest_port = 14022
-    config.vm.network "forwarded_port", guest: 22, host: 14022
+    config.vm.network "forwarded_port", guest: 22, host: 14022, id: 'ssh'
 
     config.vm.provision "shell", path: "provisioning/base-java8.sh"
     config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
@@ -92,7 +92,7 @@ Vagrant.configure(2) do |config|
     config.vm.hostname = "dev"
 
     config.ssh.guest_port = 20022
-    config.vm.network "forwarded_port", guest: 22, host: 20022
+    config.vm.network "forwarded_port", guest: 22, host: 20022, id: 'ssh'
 
     config.ssh.forward_agent = true
     config.ssh.forward_x11 = true
