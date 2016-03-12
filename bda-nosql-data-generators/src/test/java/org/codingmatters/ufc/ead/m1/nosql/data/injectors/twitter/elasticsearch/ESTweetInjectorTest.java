@@ -11,6 +11,7 @@ import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by vagrant on 2/24/16.
  */
+@Ignore
 public class ESTweetInjectorTest {
 
     private Node node;
