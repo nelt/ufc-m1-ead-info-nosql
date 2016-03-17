@@ -93,9 +93,9 @@ public class TweetResultPage {
                 "<ul>\n";
         for (Tweet tweet : this.tweets) {
             fragment += "<li>" +
-                    "<span class=\"tweet-text\">" + tweet.getText() + "</span>" +
-                    "<span class=\"tweet-user\">" + tweet.getUser().getName() + "</span>" +
-                    "<span class=\"tweet-date\">" + dateFormat.format(tweet.getCreatedAt()) + "</span>" +
+                    "<p class=\"tweet-text\">" + tweet.getText() + "</p>" +
+                    "<p class=\"tweet-user\">" + tweet.getUser().getName() + "</p>" +
+                    "<p class=\"tweet-date\">" + dateFormat.format(tweet.getCreatedAt()) + "</p>" +
                     "</li>\n";
         }
         fragment += "</ul>" +

@@ -28,10 +28,6 @@ public class CassandraSensorDataService implements SensorDataService {
         long retrievalStart = System.currentTimeMillis();
         List<SensorData> data = new LinkedList<>();
 
-//        LocalDateTime start = LocalDateTime.of(year, 1, 1, 0, 0).plusWeeks(week);
-//        start = start.minusDays(start.getDayOfWeek().getValue() + 1);
-//        LocalDateTime end = start.plusWeeks(1);
-
         ResultSet results = this.session.execute(new BoundStatement(this.statement).bind(
             sensor, String.format("%04d-%02d", year, week)
         ));
