@@ -3,6 +3,7 @@ package org.codingmatters.ufc.ead.m1.nosql.data.web.service.tweet;
 import org.codingmatters.ufc.ead.m1.nosql.data.web.service.tweet.html.TweetResultPage;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.Tweet;
 import org.codingmatters.ufc.ead.m1.nosql.twitter.bean.User;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -40,18 +41,27 @@ public class ESTweetSearchService {
             String search = request.queryParams("search");
             String [] htags = request.queryParamsValues("htags");
 
-            SearchResponse queryResponse = this.client.prepareSearch("twitter")
+            SearchRequestBuilder searchRequestBuilder = this.client
+                    .prepareSearch("twitter")
                     .setTypes("tweet")
-                    .setQuery(this.createQueryFromRequest(search, htags))
                     .setSize(100)
                     .addField("text")
                     .addField("user.name")
                     .addField("createdAt")
-                    .addField("htags")
-                    .addAggregation(
-                            AggregationBuilders.terms("htags").field("htags").size(100)
-                    )
-                    .execute().get(5, TimeUnit.SECONDS);
+                    .addField("htags");
+
+            searchRequestBuilder
+                    .setQuery(this.createQueryFromRequest(search, htags));
+
+            searchRequestBuilder.addAggregation(
+                    AggregationBuilders.terms("htags").field("htags").size(100)
+            );
+
+            SearchResponse queryResponse = searchRequestBuilder
+                    .execute()
+                    .get(5, TimeUnit.SECONDS);
+
+
 
             TweetResultPage result = new TweetResultPage();
             result.setTotalResults(queryResponse.getHits().getTotalHits());

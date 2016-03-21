@@ -42,9 +42,9 @@ public class Tweet {
         private String text;
         private String lang;
         private Date createdAt;
-        private HashSet<String> mentions;
-        private HashSet<String> htags;
-        private HashSet<String> links;
+        private HashSet<String> mentions = new HashSet<>();
+        private HashSet<String> htags = new HashSet<>();
+        private HashSet<String> links = new HashSet<>();
 
         public Builder withUser(User user) {
             this.user = user;
