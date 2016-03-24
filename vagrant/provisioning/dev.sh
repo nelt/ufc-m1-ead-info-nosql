@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MAVEN_VERSION=3.3.9
-IDEA_VERSION=15.0.2
+IDEA_VERSION=2016.1
 
 echo "downloading maven version $MAVEN_VERSION..."
 wget -nv http://apache.mindstudios.com/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && echo  "done."

@@ -8,7 +8,7 @@
 Vagrant.configure(2) do |config|
 
   config.vm.define "riak" do |config|
-    config.vm.box = "ubuntu/vivid64"
+    config.vm.box = "ubuntu/wily64"
     config.vm.hostname = "riak"
 
     config.ssh.guest_port = 10022
@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "cassandra" do |config|
-    config.vm.box = "ubuntu/vivid64"
+    config.vm.box = "ubuntu/wily64"
     config.vm.hostname = "cassandra"
 
     config.ssh.guest_port = 11022
@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "hadoop" do |config|
-    config.vm.box = "ubuntu/vivid64"
+    config.vm.box = "ubuntu/wily64"
     config.vm.hostname = "hadoop"
 
     config.ssh.guest_port = 12022
@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
 
 
   config.vm.define "elastic" do |config|
-    config.vm.box = "ubuntu/vivid64"
+    config.vm.box = "ubuntu/wily64"
     config.vm.hostname = "elastic"
 
     config.ssh.guest_port = 14022
@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "dev" do |config|
-    config.vm.box = "ubuntu/vivid64"
+    config.vm.box = "ubuntu/wily64"
     config.vm.hostname = "dev"
 
     config.ssh.guest_port = 20022
