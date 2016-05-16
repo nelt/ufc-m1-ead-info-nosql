@@ -22,9 +22,12 @@ public class CassandraTweetInjector implements TweetInjector {
 
     public CassandraTweetInjector(Session session) {
         this.session = session;
-        this.tweetStmt = this.session.prepare("INSERT INTO ufcead.tweets (tweetid, username, text, createdAt) VALUES (?,?,?,?)");
-        this.userlineStmt = this.session.prepare("INSERT INTO ufcead.user_timeline (username, tweetid, createdAt) VALUES (?,?,?)");
-        this.htaglineStmt = this.session.prepare("INSERT INTO ufcead. htag_timeline (htag, tweetid, createdAt) VALUES (?,?,?)");
+        this.tweetStmt = this.session.prepare("INSERT INTO ufcead.tweets " +
+                "(tweetid, username, text, createdAt) VALUES (?,?,?,?)");
+        this.userlineStmt = this.session.prepare("INSERT INTO ufcead.user_timeline " +
+                "(username, tweetid, createdAt) VALUES (?,?,?)");
+        this.htaglineStmt = this.session.prepare("INSERT INTO ufcead. htag_timeline " +
+                "(htag, tweetid, createdAt) VALUES (?,?,?)");
     }
 
     @Override
