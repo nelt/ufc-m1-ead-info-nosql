@@ -20,8 +20,8 @@ public class HostResolverTest {
 
     @Test
     public void testDefaults() throws Exception {
-        assertThat(new HostResolver().resolve("riak"), Matchers.is("192.168.33.100"));
-        assertThat(new HostResolver().resolve("cassandra"), Matchers.is("192.168.33.110"));
+        assertThat(new HostResolver().resolve("riak"), Matchers.is("10.0.3.47"));
+        assertThat(new HostResolver().resolve("cassandra"), Matchers.is("10.0.3.47"));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class HostResolverTest {
         System.setProperty("host.resolver.file", overrideFile.getAbsolutePath());
 
         assertThat(new HostResolver().resolve("riak"), Matchers.is("10.0.2.1"));
-        assertThat(new HostResolver().resolve("cassandra"), Matchers.is("192.168.33.110"));
+        assertThat(new HostResolver().resolve("cassandra"), Matchers.is("10.0.3.47"));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class HostResolverTest {
             }
 
             assertThat(new HostResolver().resolve("riak"), Matchers.is("10.0.2.12"));
-            assertThat(new HostResolver().resolve("cassandra"), Matchers.is("192.168.33.110"));
+            assertThat(new HostResolver().resolve("cassandra"), Matchers.is("10.0.3.47"));
         } finally {
             file.delete();
         }
