@@ -6,7 +6,7 @@
 
     <groupId>org.codingmatters.ufc.ead.m1.nosql</groupId>
     <artifactId>bda-nosql</artifactId>
-    <version>2016.0.1-SNAPSHOT</version>
+    <version>2017.0.1-SNAPSHOT</version>
 
     <name>UFC EAD - M1 BDA-NoSQL</name>
     <packaging>pom</packaging>
