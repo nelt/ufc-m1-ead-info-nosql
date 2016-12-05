@@ -1,0 +1,2 @@
+docker pull cassandra:3.7
+docker run --name cassandra -d cassandra:3.7 -p 7000:7000 -p 7001:7001 -p 7199:7199 -p 9042:9042 -p 9160:9160
