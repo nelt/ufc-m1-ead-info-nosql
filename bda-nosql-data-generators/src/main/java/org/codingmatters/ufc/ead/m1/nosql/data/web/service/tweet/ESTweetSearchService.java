@@ -72,9 +72,9 @@ public class ESTweetSearchService {
             for (SearchHit hit : queryResponse.getHits()) {
                 log.debug("fields : {}", hit.getFields().keySet());
                 Tweet tweet = new Tweet.Builder()
-                        .withText(hit.getFields().get("text").getValue())
-                        .withCreatedAt(Date.from(Instant.ofEpochMilli(hit.getFields().get("createdAt").getValue())))
-                        .withUser(new User.Builder().withName(hit.getFields().get("user.name").getValue()).build())
+                        .withText((String) hit.getFields().get("text").getValue())
+                        .withCreatedAt(Date.from(Instant.ofEpochMilli((Long)hit.getFields().get("createdAt").getValue())))
+                        .withUser(new User.Builder().withName((String)hit.getFields().get("user.name").getValue()).build())
                         .build();
                 result.addTweet(tweet);
             }
