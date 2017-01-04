@@ -10,6 +10,8 @@
 
     <logger name="com.datastax" level="INFO"/>
     <logger name="io.netty" level="INFO"/>
+    <logger name="spark.route" level="INFO"/>
+    <logger name="org.eclipse.jetty" level="INFO"/>
 
     <root level="debug">
         <appender-ref ref="STDOUT" />

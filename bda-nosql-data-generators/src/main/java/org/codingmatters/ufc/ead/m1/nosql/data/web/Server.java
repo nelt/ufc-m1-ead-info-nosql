@@ -18,6 +18,8 @@ import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsReques
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
@@ -35,7 +37,7 @@ import static spark.Spark.staticFileLocation;
  */
 public class Server {
 
-
+    private static final Logger log = LoggerFactory.getLogger(Server.class);
 
     public static void main(String[] args) {
         Server server = new Server();
@@ -45,12 +47,12 @@ public class Server {
                 try {
                     Thread.sleep(10 * 1000);
                 } catch (InterruptedException e) {
-                    System.out.println("stopping server...");
+                    log.info("stopping server...");
                 }
             }
         } finally {
             server.stop();
-            System.out.println("stopped.");
+            log.info("stopped.");
         }
     }
 
@@ -77,7 +79,7 @@ public class Server {
 
     public void run() {
         if(System.getProperty("dev.mode") != null) {
-            System.out.println("running in dev mode");
+            log.info("running in dev mode");
             externalStaticFileLocation(new File("./src/main/resources/www").getAbsolutePath());
         } else {
             staticFileLocation("www");
@@ -96,7 +98,7 @@ public class Server {
         int year = Integer.parseInt(request.params(":year"));
         int week = Integer.parseInt(request.params(":week"));
 
-        System.out.println("requested for weekly sensor data for " + sensor + " " + year + "/" + week);
+        log.info("requested for weekly sensor data for " + sensor + " " + year + "/" + week);
 
         response.type("application/json");
         return this.mapper.writeValueAsString(withService.weekData(sensor, year, week));

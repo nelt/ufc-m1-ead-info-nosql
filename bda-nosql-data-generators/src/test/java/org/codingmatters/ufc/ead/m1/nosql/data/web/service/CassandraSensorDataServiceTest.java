@@ -44,7 +44,7 @@ public class CassandraSensorDataServiceTest {
 
     @Test
     public void testAWeek() throws Exception {
-        SensorDataList weekData = this.service.weekData("sensor-1", 2015, 51);
+        SensorDataList weekData = this.service.weekData("sensor", 2015, 1);
         for (SensorData sensorData : weekData.getData()) {
             System.out.println(sensorData);
         }

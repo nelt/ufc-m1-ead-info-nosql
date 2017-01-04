@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers.dateFromLocalDateTime;
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.Helpers.formattedWeek;
 import static org.codingmatters.ufc.ead.m1.nosql.data.utils.HostResolver.resolver;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -54,10 +55,9 @@ public class CassandraInjectorTest {
         ResultSet results = this.session.execute(new BoundStatement(statement).bind(
             data.getName(), formattedWeek(data.getAt()), dateFromLocalDateTime(data.getAt())
         ));
-        assertThat(results, Matchers.is(Matchers.iterableWithSize(1)));
-        for (Row row : results) {
-            System.out.println(row);
-        }
+
+        assertThat(results.getAvailableWithoutFetching(), is(1));
+        System.out.println(results.one());
     }
 
     @After
