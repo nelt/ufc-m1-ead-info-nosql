@@ -3,6 +3,7 @@ package org.codingmatters.ufc.ead.m1.nosql.data.utils;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by vagrant on 2/18/16.
  */
+@Ignore
 public class HostResolverTest {
 
     private File overrideFile;

@@ -156,7 +156,7 @@
                         <configuration>
                         	<mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.elasticsearch.ESTweetSampleInjector</mainClass>
 				<arguments>
-				    <argument>/home/vagrant/twitter-sample-10000.json</argument>
+				    <argument>${user.home}/twitter-sample-10000.json</argument>
 				</arguments>
                         </configuration>
                     </plugin>
@@ -180,7 +180,7 @@
                         <configuration>
 	                    <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.elasticsearch.ESTweetSampleInjector</mainClass>
                             <arguments>
-                                 <argument>/home/vagrant/twitter-sample-100000.json</argument>
+                                 <argument>${user.home}/twitter-sample-100000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -204,7 +204,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.elasticsearch.ESTweetSampleInjector</mainClass>
                             <arguments>
-                                 <argument>/home/vagrant/twitter-sample-500000.json</argument>
+                                 <argument>${user.home}/twitter-sample-500000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -228,7 +228,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.mongo.MongoTweetSampleInjector</mainClass>
                             <arguments>
-                                 <argument>/home/vagrant/twitter-sample-10000.json</argument>
+                                 <argument>${user.home}/twitter-sample-10000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -252,7 +252,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.mongo.MongoTweetSampleInjector</mainClass>
                             <arguments>
-                                 <argument>/home/vagrant/twitter-sample-100000.json</argument>
+                                 <argument>${user.home}/twitter-sample-100000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -276,7 +276,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.mongo.MongoTweetSampleInjector</mainClass>
                             <arguments>
-                                 <argument>/home/vagrant/twitter-sample-500000.json</argument>
+                                 <argument>${user.home}/twitter-sample-500000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>

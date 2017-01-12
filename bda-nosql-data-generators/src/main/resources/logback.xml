@@ -12,6 +12,7 @@
     <logger name="io.netty" level="INFO"/>
     <logger name="spark.route" level="INFO"/>
     <logger name="org.eclipse.jetty" level="INFO"/>
+    <logger name="com.basho.riak" level="INFO"/>
 
     <root level="debug">
         <appender-ref ref="STDOUT" />
