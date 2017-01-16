@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  riak:
+    image: basho/riak-kv:ubuntu-2.1.4
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+  cassandra:
+    image: cassandra:3.7
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.20
+  mongo:
+    image: mongo:3.2.10
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.30
+  elasticsearch:
+    image: elasticsearch:2.2.2
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.40
+
+networks:
+  app_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1

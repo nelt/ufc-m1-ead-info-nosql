@@ -1,4 +1,10 @@
 ##
+#   VERSIONS
+##
+Docker=1.12.3
+Compose=1.9.0
+
+##
 # CASSANDRA
 ##
 docker pull cassandra:3.7
@@ -24,3 +30,9 @@ docker run --name mongo -d mongo:3.2.10
 
 
 
+
+##
+# COMPOSE
+##
+curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
