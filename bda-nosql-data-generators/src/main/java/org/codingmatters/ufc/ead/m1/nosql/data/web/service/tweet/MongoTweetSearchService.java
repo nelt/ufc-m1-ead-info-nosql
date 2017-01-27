@@ -31,14 +31,12 @@ public class MongoTweetSearchService {
         String search = request.queryParams("search");
         String [] htags = request.queryParamsValues("htags");
 
+        TweetResultPage result = new TweetResultPage();
+        result.setCurrentSearch(search);
+        result.setCurrentHtags(htags);
 
         MongoCollection<Document> tweets = this.db.getCollection("tweets");
         Document filter = this.createQueryFromRequest(search, htags);
-
-        TweetResultPage result = new TweetResultPage();
-        result.setTook(0);
-        result.setCurrentSearch(search);
-        result.setCurrentHtags(htags);
 
         FindIterable<Document> queryResults;
         long start = System.currentTimeMillis();
