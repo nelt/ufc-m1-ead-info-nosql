@@ -10,7 +10,7 @@
         <version>2017.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bda-nosql-tp2</artifactId>
+    <artifactId>bda-nosql-tp</artifactId>
 
     <dependencies>
         <dependency>
@@ -54,7 +54,7 @@
 
     <profiles>
         <profile>
-            <id>tp2-small</id>
+            <id>tp-small</id>
             <build>
                 <plugins>
                     <plugin>
@@ -70,7 +70,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.cassandra.CassandraTweetSampleInjector</mainClass>
                             <arguments>
-                                <argument>/home/vagrant/twitter-sample-10000.json</argument>
+                                <argument>${user.home}/twitter-sample-10000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -78,7 +78,7 @@
             </build>
         </profile>
         <profile>
-            <id>tp2-medium</id>
+            <id>tp-medium</id>
             <build>
                 <plugins>
                     <plugin>
@@ -94,7 +94,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.cassandra.CassandraTweetSampleInjector</mainClass>
                             <arguments>
-                                <argument>/home/vagrant/twitter-sample-100000.json</argument>
+                                <argument>${user.home}//twitter-sample-100000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
@@ -102,7 +102,7 @@
             </build>
         </profile>
         <profile>
-            <id>tp2-big</id>
+            <id>tp-big</id>
             <build>
                 <plugins>
                     <plugin>
@@ -118,7 +118,7 @@
                         <configuration>
                             <mainClass>org.codingmatters.ufc.ead.m1.nosql.data.injectors.twitter.cassandra.CassandraTweetSampleInjector</mainClass>
                             <arguments>
-                                <argument>/home/vagrant/twitter-sample-500000.json</argument>
+                                <argument>${user.home}//twitter-sample-500000.json</argument>
                             </arguments>
                         </configuration>
                     </plugin>
