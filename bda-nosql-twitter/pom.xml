@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.codingmatters.ufc.ead.m1.nosql</groupId>
         <artifactId>bda-nosql</artifactId>
-        <version>2017.0.1-SNAPSHOT</version>
+        <version>2018.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bda-nosql-twitter</artifactId>
