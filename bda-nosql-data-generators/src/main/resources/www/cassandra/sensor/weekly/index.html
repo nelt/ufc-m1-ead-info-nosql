@@ -42,8 +42,9 @@
             </td>
             <td>
                 <select name="year" id="year-selection">
-                    <option>2015</option>
                     <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
                 </select>
             </td>
             <td>
@@ -121,10 +122,10 @@
         params.sensor = 'sensor-0';
     }
     if(! params.year) {
-        params.year = '2015';
+        params.year = '2017';
     }
     if(! params.week) {
-        params.week = '1';
+        params.week = '20';
     }
     document.getElementById('sensor-selection').value = params.sensor;
     document.getElementById('year-selection').value = params.year;
