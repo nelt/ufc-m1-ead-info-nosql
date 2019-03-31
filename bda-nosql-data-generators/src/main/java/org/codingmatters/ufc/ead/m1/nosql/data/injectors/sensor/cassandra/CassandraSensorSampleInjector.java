@@ -2,6 +2,7 @@ package org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.cassandra;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.TypeTokens;
 import org.codingmatters.ufc.ead.m1.nosql.data.injectors.sensor.SensorSampleInjector;
 
 import java.time.LocalDateTime;

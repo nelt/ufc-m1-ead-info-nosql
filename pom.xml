@@ -18,6 +18,7 @@
     <modules>
         <module>bda-nosql-twitter</module>
         <module>bda-nosql-data-generators</module>
+        <module>bda-nosql-tp</module>
     </modules>
 
     <licenses>
